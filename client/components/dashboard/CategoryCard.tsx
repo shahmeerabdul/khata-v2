@@ -3,11 +3,11 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Amount } from "@/components/money/Amount";
-import type { Category } from "@/lib/types";
+import type { LedgerCategory } from "@/lib/types";
 import { CATEGORY_LABELS } from "@/lib/format";
 
 interface CategoryCardProps {
-  category: Category;
+  category: LedgerCategory;
   amount: number;
   tone: "in" | "out" | "pending";
   icon: LucideIcon;

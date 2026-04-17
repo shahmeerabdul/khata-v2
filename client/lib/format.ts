@@ -1,6 +1,9 @@
-import type { Category } from "./types";
+import type { LedgerCategory, RupeeAmount, EpochMs } from "./types";
 
-export function formatPKR(amount: number, options?: { sign?: boolean }): string {
+export function formatPKR(
+  amount: RupeeAmount,
+  options?: { sign?: boolean }
+): string {
   const abs = Math.abs(amount);
   const formatted = new Intl.NumberFormat("en-PK", {
     maximumFractionDigits: 0,
@@ -9,7 +12,7 @@ export function formatPKR(amount: number, options?: { sign?: boolean }): string 
   return `${sign}Rs. ${formatted}`;
 }
 
-export function formatPKRCompact(amount: number): string {
+export function formatPKRCompact(amount: RupeeAmount): string {
   if (Math.abs(amount) >= 100000) {
     return `Rs. ${(amount / 100000).toFixed(1)}L`;
   }
@@ -19,8 +22,9 @@ export function formatPKRCompact(amount: number): string {
   return formatPKR(amount);
 }
 
-export function timeAgo(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime();
+export function timeAgo(when: EpochMs | string): string {
+  const ms = typeof when === "number" ? when : new Date(when).getTime();
+  const diff = Date.now() - ms;
   const minutes = Math.round(diff / 60000);
   if (minutes < 1) return "just now";
   if (minutes < 60) return `${minutes}m ago`;
@@ -28,14 +32,14 @@ export function timeAgo(iso: string): string {
   if (hours < 24) return `${hours}h ago`;
   const days = Math.round(hours / 24);
   if (days < 7) return `${days}d ago`;
-  return new Date(iso).toLocaleDateString("en-GB", {
+  return new Date(ms).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",
   });
 }
 
 export const CATEGORY_LABELS: Record<
-  Category,
+  LedgerCategory,
   { en: string; ur: string; verb: string; href: string }
 > = {
   debt: {

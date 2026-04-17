@@ -1,0 +1,33 @@
+{
+  "name": "@khata/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend logic, data layer, and integrations for the Voice Khata app.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./encryption": "./src/encryption.ts",
+    "./store": "./src/store/ledger-store.ts",
+    "./actions": "./src/actions/index.ts",
+    "./actions/stt": "./src/actions/stt.ts",
+    "./actions/parser": "./src/actions/parser.ts",
+    "./actions/records": "./src/actions/records.ts",
+    "./actions/whatsapp": "./src/actions/whatsapp.ts",
+    "./actions/confirmation": "./src/actions/confirmation.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "idb": "^8.0.0",
+    "zod": "^3.23.8",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "typescript": "^5.6.3"
+  }
+}

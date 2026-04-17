@@ -13,12 +13,12 @@ import { HeroBalance } from "@/components/dashboard/HeroBalance";
 import { StatTile } from "@/components/dashboard/StatTile";
 import { CategoryCard } from "@/components/dashboard/CategoryCard";
 import { RecentList } from "@/components/dashboard/RecentList";
-import { getDashboardStats, listTransactions } from "@/lib/actions";
+import { getDashboardStats, listLedger } from "@/lib/actions";
 
 export default async function HomePage() {
   const [stats, recent] = await Promise.all([
     getDashboardStats(),
-    listTransactions(),
+    listLedger(),
   ]);
 
   return (
@@ -97,7 +97,7 @@ export default async function HomePage() {
         </div>
 
         <div className="mt-3">
-          <RecentList transactions={recent.slice(0, 6)} />
+          <RecentList entries={recent.slice(0, 6)} />
         </div>
 
         <div className="h-4" />
