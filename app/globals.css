@@ -39,6 +39,22 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Ledger custom palette */
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-cream: var(--cream);
+  --color-canvas: var(--canvas);
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-money-in: var(--money-in);
+  --color-money-in-bg: var(--money-in-bg);
+  --color-money-out: var(--money-out);
+  --color-money-out-bg: var(--money-out-bg);
+  --color-pending: var(--pending);
+  --color-pending-bg: var(--pending-bg);
+  --color-ink: var(--ink);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,82 +65,110 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Shadcn base (overridden with our warm, rounded, friendly look) */
+  --background: #faf8f2;
+  --foreground: #111111;
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f1ea;
+  --secondary-foreground: #111111;
+  --muted: #f3f1ea;
+  --muted-foreground: #6b6b63;
+  --accent: #eef3ec;
+  --accent-foreground: #111111;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: #ece9df;
+  --input: #ece9df;
+  --ring: #111111;
+  --chart-1: #b6d8c3;
+  --chart-2: #f9e27a;
+  --chart-3: #fca5a5;
+  --chart-4: #fbbf24;
+  --chart-5: #111111;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111111;
+  --sidebar-primary: #111111;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef3ec;
+  --sidebar-accent-foreground: #111111;
+  --sidebar-border: #ece9df;
+  --sidebar-ring: #111111;
+
+  /* Ledger-specific tokens (inspired by the sage/cream/yellow/black fintech inspo) */
+  --sage: #b6d8c3;          /* outer page letterbox */
+  --sage-soft: #d9ebe0;     /* subtle accents, empty states */
+  --cream: #faf8f2;         /* main app canvas */
+  --canvas: #fdfcf8;        /* cards-on-canvas variant */
+  --hero: #f9e27a;          /* primary hero balance card */
+  --hero-foreground: #1a1a1a;
+  --money-in: #0f8a4d;      /* income / sales */
+  --money-in-bg: #e7f4ec;
+  --money-out: #d1365c;     /* debt given / payables */
+  --money-out-bg: #fbe7ee;
+  --pending: #c2780c;       /* udhaar pending */
+  --pending-bg: #fdf1dc;
+  --ink: #0d0d0d;           /* pure-black CTAs */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #0d0d0d;
+  --foreground: #f7f5ee;
+  --card: #161614;
+  --card-foreground: #f7f5ee;
+  --popover: #161614;
+  --popover-foreground: #f7f5ee;
+  --primary: #f7f5ee;
+  --primary-foreground: #0d0d0d;
+  --secondary: #232321;
+  --secondary-foreground: #f7f5ee;
+  --muted: #232321;
+  --muted-foreground: #a3a196;
+  --accent: #232321;
+  --accent-foreground: #f7f5ee;
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --ring: #f7f5ee;
+  --sage: #1a2a22;
+  --sage-soft: #22332b;
+  --cream: #0d0d0d;
+  --canvas: #161614;
+  --hero: #f9e27a;
+  --hero-foreground: #1a1a1a;
+  --money-in: #4ade80;
+  --money-in-bg: #0f2a1b;
+  --money-out: #fb7185;
+  --money-out-bg: #2a0f17;
+  --pending: #fbbf24;
+  --pending-bg: #2a1d0a;
+  --ink: #f7f5ee;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     @apply font-sans;
+  }
+  body {
+    @apply bg-sage text-foreground;
+    -webkit-tap-highlight-color: transparent;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  /* Disable pull-to-refresh bounce on mobile PWA-ish feel */
+  html,
+  body {
+    overscroll-behavior-y: contain;
+  }
+  /* Large tabular numerals for money */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
   }
 }

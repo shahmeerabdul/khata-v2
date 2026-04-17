@@ -1,65 +1,107 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowDownLeft,
+  ArrowUpRight,
+  ShoppingBag,
+  Plus,
+  TrendingUp,
+  Clock,
+} from "lucide-react";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { MobileShell } from "@/components/layout/MobileShell";
+import { HeroBalance } from "@/components/dashboard/HeroBalance";
+import { StatTile } from "@/components/dashboard/StatTile";
+import { CategoryCard } from "@/components/dashboard/CategoryCard";
+import { RecentList } from "@/components/dashboard/RecentList";
+import { getDashboardStats, listTransactions } from "@/lib/actions";
 
-export default function Home() {
+export default async function HomePage() {
+  const [stats, recent] = await Promise.all([
+    getDashboardStats(),
+    listTransactions(),
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <AppHeader variant="home" />
+      <MobileShell>
+        <HeroBalance
+          totalReceivable={stats.totalReceivable}
+          pendingDebtCount={stats.pendingDebtCount}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        <div className="mt-4 flex gap-3">
+          <StatTile
+            label="Today's Sales"
+            sublabel="Aaj ki bikri"
+            amount={stats.todaySales}
+            tone="in"
+            icon={<TrendingUp className="size-4" />}
+          />
+          <StatTile
+            label="You owe"
+            sublabel="Aap ke denay"
+            amount={stats.totalPayable}
+            tone="out"
+            icon={<Clock className="size-4" />}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="mt-6 flex items-center justify-between">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
+            Categories
+          </h2>
+          <Link
+            href="/new"
+            className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-[11px] font-semibold ring-1 ring-border shadow-sm active:scale-95 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Plus className="size-3.5" strokeWidth={2.5} />
+            Add manually
+          </Link>
         </div>
-      </main>
-    </div>
+
+        <div className="mt-3 space-y-3">
+          <CategoryCard
+            category="debt"
+            amount={stats.totalReceivable}
+            tone="pending"
+            icon={ArrowDownLeft}
+            subtitle="Udhaar customers owe you"
+          />
+          <CategoryCard
+            category="payable"
+            amount={stats.totalPayable}
+            tone="out"
+            icon={ArrowUpRight}
+            subtitle="What you owe suppliers"
+          />
+          <CategoryCard
+            category="sale"
+            amount={stats.todaySales}
+            tone="in"
+            icon={ShoppingBag}
+            subtitle="Today's cash sales"
+          />
+        </div>
+
+        <div className="mt-7 flex items-center justify-between">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
+            Recent activity
+          </h2>
+          <Link
+            href="/activity"
+            className="text-[11px] font-semibold text-foreground/70 hover:text-foreground"
+          >
+            See all
+          </Link>
+        </div>
+
+        <div className="mt-3">
+          <RecentList transactions={recent.slice(0, 6)} />
+        </div>
+
+        <div className="h-4" />
+      </MobileShell>
+    </>
   );
 }
