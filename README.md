@@ -2,7 +2,7 @@
 
 > A voice-first FinTech prototype so shopkeepers can track **sales**, **customer credit (*udhaar*)**, and **supplier payables** by speaking in **Urdu or English** — minimal typing, mobile-first, bilingual labels.
   
-Built for **Micathon '26 — "Money Moves"**.
+Built for **Micathon '26  "Money Moves"**.
 
 ---
 
